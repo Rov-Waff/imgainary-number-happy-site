@@ -43,6 +43,6 @@ const main = () => {
     renderer.render(scene, camera);
   };
 
-  animate();
+  requestAnimationFrame(animate);
 };
 main();
