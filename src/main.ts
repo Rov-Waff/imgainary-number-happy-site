@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import texture_img from "./1752218241054.png"
 
 const main = () => {
   // Create a scene
@@ -20,25 +21,24 @@ const main = () => {
 
   // Create a geometry and a material
   const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshPhysicalMaterial({
+  const material = new THREE.MeshPhongMaterial({
     color: 0xffffff,
-    metalness: 0.5,
-    roughness: 0.1,
     map: new THREE.TextureLoader().load(
-      "https://threejs.org/examples/textures/crate.gif"
+      texture_img
     ),
   });
 
   // Create a mesh
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
-  const light = new THREE.DirectionalLight(0xffffff, 4);
-  light.position.set(5, 5, 5).normalize();
+  const light = new THREE.DirectionalLight(0xffffff, 3);
+  light.position.set(0, 0, 5).normalize();
   scene.add(light);
+  cube.rotation.x += 0.4;
   // Animation loop
-  const animate = () => {
+  const animate = (time:number) => {
     requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
+    cube.position.y=Math.sin(time/1000)/2
     cube.rotation.y += 0.01;
     renderer.render(scene, camera);
   };
